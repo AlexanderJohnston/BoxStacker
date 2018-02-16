@@ -1,15 +1,22 @@
-﻿namespace BoxStacker
+﻿#region Header
+// BoxStacker/Box.cs - Created on 2018-02-07 at 6:11 PM by Alexander Johnston.
+#endregion
+
+namespace BoxStacker
 {
     internal class Box
     {
-        public int Size;
+        #region Properties & Fields
+        public int Complement ;
+        public int Size ;
+        #endregion
 
-        public int Complement;
-
-        public Box(int size, int stackCapacity)
+        #region Constructors
+        public Box (int size, int stackCapacity)
         {
-            Size = size;
-            Complement = stackCapacity - size;
+            Size       = size ;
+            Complement = stackCapacity - size ;
         }
+        #endregion
     }
 }

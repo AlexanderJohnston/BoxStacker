@@ -1,22 +1,32 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿#region Header
+// BoxStacker/Stack.cs - Created on 2018-02-07 at 6:11 PM by Alexander Johnston.
+#endregion
+
+#region Using
+using System.Collections.Generic ;
+using System.Linq ;
+#endregion
 
 namespace BoxStacker
 {
     internal class Stack
     {
-        public List<Box> boxes = new List<Box>();
+        #region Properties & Fields
+        public List<Box> boxes = new List<Box> () ;
 
-        public int Capacity = 0;
+        public int Capacity = 0 ;
 
-        public int Size => this.boxes.Sum(box => box.Size);
+        public int Size => boxes.Sum (box => box.Size) ;
 
-        public int Deficit => this. Capacity - this.Size;
+        public int Deficit => Capacity - Size ;
+        #endregion
 
-        public void Add(Box box)
+        #region Members
+        public void Add (Box box)
         {
-            if (this.Deficit >= box.Size)
-                boxes.Add(box);
+            if ( Deficit >= box.Size )
+                boxes.Add (box) ;
         }
+        #endregion
     }
 }

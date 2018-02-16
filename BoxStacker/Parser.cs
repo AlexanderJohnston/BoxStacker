@@ -1,52 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿#region Header
+// BoxStacker/Parser.cs - Created on 2018-02-15 at 11:39 PM by Alexander Johnston.
+#endregion
+
+#region Using
+using System ;
+using System.Collections.Generic ;
+using System.Threading.Tasks ;
+#endregion
 
 namespace BoxStacker
 {
     internal class Parser
     {
-        private string[] _inputs { get; set; }
+        #region Properties & Fields
+        private string[] _inputs { get ; }
+        #endregion
 
-        public Parser(string[] args)
+        #region Constructors
+        public Parser (string[] args)
         {
-            this._inputs = args;
-            Task processNewInput = ParseInputAsync();
-            processNewInput.ContinueWith((task) => Console.WriteLine("Done parsing." + " Success: " + task.IsCompletedSuccessfully));
+            _inputs = args ;
+            Task processNewInput = ParseInputAsync () ;
+            processNewInput.ContinueWith (task => Console.WriteLine ("Done parsing." + " Success: " +
+                                                                     task.IsCompletedSuccessfully)) ;
+        }
+        #endregion
+
+        #region Members
+        private async Task<IEnumerable<Sorter>> ParseInputAsync ()
+        {
+            foreach ( var input in _inputs ) Task
         }
 
-        private async Task<IEnumerable<Sorter>> ParseInputAsync()
+        private async Task<(List<Stack> stacks, List<Box> boxes)> SplitInput (string input)
         {
-            foreach (var input in _inputs)
-            {
-                Task 
-            }
+            var boxes  = input.AsSpan ().Slice (2, input.Length - 2) ;
+            var stacks = input.AsSpan ().Slice (0, 1) ;
+
+            var boxSizes = ParseBoxes (boxes) ;
+            CreateStacks (Convert.ToInt32 (stacks.Slice (0, 1))) ;
         }
 
-        private async Task<(List<Stack> stacks, List<Box> box)> SplitInput(string input)
+        private ReadOnlySpan<int> ParseBoxes (ReadOnlySpan<char> boxChars)
         {
-            ReadOnlySpan<char> boxes = input.AsSpan().Slice(2, input.Length - 2);
-            ReadOnlySpan<char> stacks = input.AsSpan().Slice(0, 1);
+            var boxSizes = new int[boxChars.Length] ;
+            for ( var i = boxChars.Length - 1 ; i >= 0 ; i-- )
+                boxSizes[i] = Convert.ToInt32 (boxChars[i]) ;
 
-            var boxSizes = ParseBoxes(boxes);
-            CreateStacks(Convert.ToInt32(stacks.Slice(0,1)));
+            return boxSizes.AsSpan () ;
         }
 
-        private ReadOnlySpan<int> ParseBoxes(ReadOnlySpan<char> boxChars)
+        private void CreateStacks (int stackCount)
         {
-            var boxSizes = new int[boxChars.Length];
-            for (var i = boxChars.Length - 1; i >= 0; i--)
-                boxSizes[i] = Convert.ToInt32(boxChars[i]); 
-
-            return boxSizes.AsSpan();
+            for ( var i = stackCount ; i > 0 ; i-- ) { }
         }
-
-        private void CreateStacks(int stackCount)
-        {
-            for (int i = stackCount; i > 0; i--)
-            {
-
-            }
-        }
+        #endregion
     }
 }
