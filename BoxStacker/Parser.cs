@@ -15,7 +15,7 @@ namespace BoxStacker
             processNewInput.ContinueWith((task) => Console.WriteLine("Done parsing." + " Success: " + task.IsCompletedSuccessfully));
         }
 
-        private async Task<List<Sorter>> ParseInputAsync()
+        private async Task<IEnumerable<Sorter>> ParseInputAsync()
         {
             foreach (var input in _inputs)
             {
